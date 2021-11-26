@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package scanner;
+
+enum ScannerMessageType {
+    Data = 0;
+    ScannerCtl = 1;
+    EspCtl = 2;
+};
+
+enum ScannerCtlCmd{
+    FactoryReset = 0;
+    ManualMode = 1;
+    AutoMode = 2;
+    AutoFast = 3;
+    TiggerScanner = 4;
+    ScanOff = 5;
+    ScanTimeoutAlwaysOpen = 6;
+    EnableScanFailTips = 7;
+    DisableScanFailTips = 8;
+    TailCRLF = 9;
+    Version = 10;
+    IsAlive = 11;
+    Reboot = 12;
+};
+
+enum EspCtlCmd{
+    EspFactoryReset = 0;
+    OTA = 1;
+    VoiceUpdate = 2;
+    BLE = 3;
+};
+
+message EspBleCtlMMessag{
+    bool on = 1;
+    string name = 2;
+};
+
+message ScannerMessag {
+    ScannerMessageType type = 1;
+
+    // Type Data
+    bytes _data = 2;
+
+    // Type EspCtl
+    EspCtlCmd esp_cmd = 3;
+    string ota_url = 4; 
+    string voice_url = 5;
+    EspBleCtlMMessag blemasg = 6;
+
+    // Type ScannerCtl
+    ScannerCtlCmd s_cmd = 7;
+};
+
+message ScannerMessags {
+    repeated ScannerMessag masgs =1;
+};
