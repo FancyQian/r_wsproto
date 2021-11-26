@@ -16,7 +16,7 @@ fn main () {
 
     match ws_server {
         Some(_) => {
-            let server = TcpListener::bind("127.0.0.1:8001").unwrap();
+            let server = TcpListener::bind("192.168.40.17:8001").unwrap();
 
             for stream in server.incoming() {
                 spawn (move || {
@@ -30,7 +30,7 @@ fn main () {
                             for sc_mesg in scanner_message.mesgs.iter() {
                                 match ScannerMessageType::from_i32(sc_mesg.r#type) {
                                     Some(ScannerMessageType::Data) => {
-                                        println!("Decode QR data is {:?}", sc_mesg.data);
+                                        println!("Decode QR data: {}", String::from_utf8(sc_mesg.data.clone()).unwrap());
                                     },
                                     Some(ScannerMessageType::ScannerCtl) => {
                                         if let ScannerCtlCmd::Reboot = ScannerCtlCmd::from_i32(sc_mesg.s_cmd).unwrap() {
