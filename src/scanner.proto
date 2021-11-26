@@ -31,12 +31,12 @@ enum EspCtlCmd{
     BLE = 3;
 };
 
-message EspBleCtlMMessag{
+message EspBleCtlMessage{
     bool on = 1;
     string name = 2;
 };
 
-message ScannerMessag {
+message ScannerMessage {
     ScannerMessageType type = 1;
 
     // Type Data
@@ -46,12 +46,12 @@ message ScannerMessag {
     EspCtlCmd esp_cmd = 3;
     string ota_url = 4; 
     string voice_url = 5;
-    EspBleCtlMMessag blemasg = 6;
+    EspBleCtlMessage blemesg = 6;
 
     // Type ScannerCtl
     ScannerCtlCmd s_cmd = 7;
 };
 
-message ScannerMessags {
-    repeated ScannerMessag masgs =1;
+message ScannerMessages {
+    repeated ScannerMessage mesgs =1;
 };
